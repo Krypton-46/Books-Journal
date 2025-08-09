@@ -1,5 +1,4 @@
 
-````markdown
 # 📚 My Books Diary
 
 A personal web app for book lovers to keep track of the books they've read and store all their reading notes in one place.  
