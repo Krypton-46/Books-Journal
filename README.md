@@ -1,4 +1,3 @@
-Absolutely! Here’s the full README in one box for easy copy-pasting:
 
 ````markdown
 # 📚 My Books Diary
@@ -37,7 +36,7 @@ Built with **Node.js**, **Express**, and **PostgreSQL**.
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/yourusername/my-books-diary.git
+git clone https://github.com/Krypton-46/Books-Journal.git
 cd my-books-diary
 ````
 
@@ -93,5 +92,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ```
 
-Just replace `https://github.com/yourusername/my-books-diary.git` with your actual repo URL when you’re ready!
 ```
