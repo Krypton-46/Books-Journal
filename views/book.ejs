@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= locals.book ? locals.book.title : 'Book Details' %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #fafafa;
+        color: #333;
+        padding: 40px;
+        max-width: 600px;
+        margin: auto;
+        line-height: 1.6;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+      }
+
+      .label {
+        font-weight: bold;
+      }
+
+      .section {
+        margin-bottom: 20px;
+      }
+
+      .notes {
+        background: #f2f2f2;
+        padding: 10px;
+        border-left: 4px solid #ccc;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <% if (locals.book) { %>
+    <h1><%= locals.book.title %></h1>
+    <div class="book-cover">
+      <img src="<%= book.cover_url %>" alt="Book Cover" />
+    </div>
+    <div class="section">
+      <span class="label">Rating:</span> <%= locals.book.rating %>
+    </div>
+
+    <div class="section">
+      <span class="label">ISBN:</span> <%= locals.book.isbn %>
+    </div>
+
+    <div class="section">
+      <span class="label">Date Read:</span> <%=
+      locals.book.date_read.toISOString().slice(0,10) %> %>
+    </div>
+
+    <% if (locals.book.notes && locals.book.notes.trim()) { %>
+    <div class="section">
+      <span class="label">Notes:</span>
+      <div class="notes"><%= locals.book.notes %></div>
+    </div>
+    <% } %> <% } else { %>
+    <p>No book data available.</p>
+    <% } %>
+  </body>
+</html>

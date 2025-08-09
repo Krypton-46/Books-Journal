@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - Books</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form action="/login" method="POST">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Login</button>
+      </form>
+      <form action="/signup" method="GET">
+        <button type="submit" class="signup">Sign Up</button>
+      </form>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

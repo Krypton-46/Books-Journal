@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Error - Books Project</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="container" style="max-width: 400px; margin-top: 80px">
+      <h2 style="color: #dc3545">Error</h2>
+      <p><strong><%= msg %></strong></p>
+      <% if (typeof err !== "undefined" && err) { %>
+      <pre
+        style="
+          color: #888;
+          background: #f8d7da;
+          padding: 10px;
+          border-radius: 4px;
+        "
+      >
+<%= err %></pre
+      >
+      <% } %>
+      <a href="/" style="display: block; margin-top: 20px; color: #007bff"
+        >Back to Home</a
+      >
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

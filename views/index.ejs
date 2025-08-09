@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Bookshelf</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="username">
+        <span>👤 <%= email %></span>
+        <br />
+        <a href="/logout">Logout</a>
+
+        <hr />
+        <a href="/new" style="text-decoration: none; color: inherit"
+          >Add New Book</a
+        >
+      </div>
+      <h1>📚 My Bookshelf</h1>
+    </div>
+    <div class="bookshelf">
+      <% if (locals.books && books.length > 0) { %> <%
+      books.forEach(function(book) { %>
+
+      <div class="book-card">
+        <a href="/book/<%=book.isbn%> " target="_blank">
+          <div class="book-cover">
+            <img src="<%= book.cover_url %>" alt="Book Cover" />
+          </div>
+        </a>
+        <div class="book-details">
+          <h2><%= book.title %></h2>
+          <p><strong>ISBN:</strong> <%= book.isbn %></p>
+          <p><strong>Rating:</strong> <%= book.rating %> /10</p>
+          <p>
+            <strong>Date Read:</strong> <%=
+            book.date_read.toISOString().slice(0,10) %>
+          </p>
+        </div>
+      </div>
+      <% }); %> <% } else { %>
+      <div class="no-books">
+        <p>No books found. Start adding your favorite books!</p>
+      </div>
+      <% } %>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

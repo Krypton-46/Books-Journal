@@ -1,0 +1,141 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30px;
+}
+.header .username {
+  position: absolute;
+  right: 30px;
+  top: 18px;
+  font-size: 1.1em;
+  color: #444;
+  background: #f1f1f1;
+  padding: 7px 18px;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px #e0e0e0;
+}
+.header h1 {
+  font-size: 2.3em;
+  color: #2d3a4b;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  font-weight: 700;
+}
+
+.bookshelf {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 0 auto 40px auto;
+  max-width: 1100px;
+}
+.book-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #e0e0e0;
+  width: 320px;
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s;
+}
+.book-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 28px #d1d1d1;
+}
+.book-cover {
+  width: 120px;
+  height: 170px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #ececec;
+}
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.book-details h2 {
+  font-size: 1.25em;
+  color: #2d3a4b;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.book-details p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 1em;
+  word-break: break-word;
+}
+.no-books {
+  text-align: center;
+  color: #888;
+  font-size: 1.1em;
+  margin-top: 60px;
+}
+.container {
+  max-width: 350px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #ccc;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button.signup {
+  background: #28a745;
+  margin-top: 10px;
+}
+h2 {
+  text-align: center;
+}
+#notes {
+  width: 100%;
+  height: 150px;
+  resize: none;
+}
+.footer {
+  margin-top: 40px;
+  padding: 18px 0 10px 0;
+  background: #f8f9fa;
+  text-align: center;
+  color: #555;
+  border-top: 1px solid #e0e0e0;
+  font-size: 1.05em;
+  letter-spacing: 0.5px;
+}
+.footer .heart {
+  color: #e25555;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
