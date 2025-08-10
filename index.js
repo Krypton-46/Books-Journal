@@ -1,15 +1,16 @@
 import express from "express";
-import axious from "axios";
 import bodyParser from "body-parser";
 import session from "express-session";
 import pg from "pg";
+import dotenv from "dotenv";
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "Books",
-  password: "hellopin",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
+
 const img_URL = "https://covers.openlibrary.org/b/isbn/";
 db.connect();
 const app = express();
@@ -17,15 +18,17 @@ const port = 3000;
 let books = [];
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+dotenv.config();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(
   session({
-    secret: "heavyProject123@", // change to something secure
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
 );
+
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
