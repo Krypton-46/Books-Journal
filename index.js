@@ -13,12 +13,12 @@ const db = new pg.Client({
 
 const img_URL = "https://covers.openlibrary.org/b/isbn/";
 db.connect();
+dotenv.config();
 const app = express();
 const port = 3000;
 let books = [];
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-dotenv.config();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(
@@ -57,7 +57,7 @@ app.post("/login", async (req, res) => {
     ]);
     const correctPassword = result.rows[0].password;
     if (password == correctPassword) {
-      const result = await db.query("select * from book where email=$1", [
+      const result = await db.query("select * from books where email=$1", [
         email,
       ]);
       books = result.rows;
@@ -76,7 +76,7 @@ app.get("/new", (req, res) => {
 app.get("/book/:isbn", async (req, res) => {
   const isbn = req.params.isbn;
   const result = await db.query(
-    "select * from book where isbn=$1 and email=$2",
+    "select * from books where isbn=$1 and email=$2",
     [isbn, req.session.email]
   );
   const book = result.rows[0];
@@ -101,11 +101,11 @@ app.post("/new", async (req, res) => {
   const url = img_URL + isbn + "-M.jpg";
   try {
     await db.query(
-      "insert into book (isbn,title,rating,notes,date_read,email,cover_url) values ($1,$2,$3,$4,$5,$6,$7)",
+      "insert into books (isbn,title,rating,notes,date_read,email,cover_url) values ($1,$2,$3,$4,$5,$6,$7)",
       [isbn, title, rating, notes, date, req.session.email, url]
     );
     const result = await db.query(
-      "select * from book where email=$1 order by rating desc",
+      "select * from books where email=$1 order by rating desc",
       [req.session.email]
     );
     books = result.rows;
