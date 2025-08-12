@@ -247,6 +247,7 @@ app.get(
     failureRedirect: "/",
   })
 );
+
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -255,6 +256,24 @@ app.post(
   })
 );
 
+app.post("/updatenotes", async (req, res) => {
+  if (req.isAuthenticated()) {
+    const isbn = req.body.isbn;
+    const notes = req.body.notes;
+    try {
+      await db.query("update books set notes =$1 where isbn=$2 and email=$3", [
+        notes,
+        isbn,
+        req.user.email,
+      ]);
+      res.redirect(`/book/${isbn}`);
+    } catch (err) {
+      res.render("error.ejs", { msg: err });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
