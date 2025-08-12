@@ -46,7 +46,7 @@ db.connect().catch((err) => {
 
 app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
-    res.redirect("index.ejs");
+    res.redirect("/index");
   } else {
     res.render("login.ejs");
   }
