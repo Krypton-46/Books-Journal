@@ -7,6 +7,7 @@ import { Strategy } from "passport-local";
 import GoogleStrategy from "passport-google-oauth2";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import methodOverride from "method-override";
 
 dotenv.config();
 const app = express();
@@ -40,6 +41,8 @@ const db = new pg.Client({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
+
 db.connect().catch((err) => {
   console.error("database error");
 });
@@ -91,7 +94,20 @@ app.get("/book/:isbn", async (req, res) => {
     res.redirect("/");
   }
 });
-
+app.delete("/delete/:isbn", async (req, res) => {
+  try {
+    if (req.isAuthenticated()) {
+      const isbn = req.params.isbn;
+      const result = await db.query(
+        "delete from books where isbn=$1 and email =$2",
+        [isbn, req.user.email]
+      );
+    }
+    res.redirect("/");
+  } catch (error) {
+    res.render("error.ejs", { err: error, msg: "Cant delete Book" });
+  }
+});
 app.get("/logout", (req, res) => {
   req.logout(function (err) {
     if (err) {

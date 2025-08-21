@@ -58,10 +58,34 @@
       button:hover {
         background: #45a049;
       }
+      .delete-button {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        background: #ff4d4d;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .delete-button:hover {
+        background: #e60000;
+      }
     </style>
   </head>
   <body>
     <% if (locals.book) { %>
+    <form
+      action="/delete/<%= book.isbn %>?_method=DELETE"
+      method="POST"
+      style="display: inline"
+    >
+      <button type="submit" class="delete-button">🗑️ Delete</button>
+    </form>
+
+    <% } %> <% if (locals.book) { %>
     <h1><%= locals.book.title %></h1>
     <div class="book-cover">
       <img src="<%= book.cover_url %>" alt="Book Cover" />
