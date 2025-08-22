@@ -77,12 +77,13 @@
   </head>
   <body>
     <% if (locals.book) { %>
+    <a href="/edit/<%=book.isbn%>"><button>Edit Info</button></a>
     <form
       action="/delete/<%= book.isbn %>?_method=DELETE"
       method="POST"
       style="display: inline"
     >
-      <button type="submit" class="delete-button">🗑️ Delete</button>
+      <button type="submit" class="delete-button">🗑️ Delete Book</button>
     </form>
 
     <% } %> <% if (locals.book) { %>
@@ -111,19 +112,5 @@
     <% } %> <% } else { %>
     <p>No book data available.</p>
     <% } %>
-    <div class="section">
-      <form action="/updatenotes" method="POST">
-        <!-- Pass ISBN -->
-        <input type="hidden" name="isbn" value="<%= book.isbn %>" />
-
-        <label class="label" for="notes">Edit Notes:</label>
-        <!-- Pass current notes in textarea -->
-        <textarea style="resize: none" id="notes" name="notes">
-<%= book.notes || '' %></textarea
-        >
-
-        <button type="submit">Update Notes</button>
-      </form>
-    </div>
   </body>
 </html>

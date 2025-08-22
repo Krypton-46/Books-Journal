@@ -62,7 +62,50 @@ app.get("/signup", (req, res) => {
 app.get("/new", (req, res) => {
   res.render("new.ejs");
 });
-
+app.get("/edit/:isbn", async (req, res) => {
+  if (req.isAuthenticated()) {
+    const isbn = req.params.isbn;
+    const result = await db.query(
+      "select * from books where isbn=$1 and email = $2",
+      [isbn, req.user.email]
+    );
+    const book = result.rows[0];
+    res.render("edit.ejs", { book: book });
+  } else {
+    res.redirect("/");
+  }
+});
+app.post("/updatebook", async (req, res) => {
+  if (req.isAuthenticated()) {
+    const { isbn, date_read, title, rating, notes, original_isbn } = req.body;
+    const cover_url = img_URL + isbn + "-M.jpg";
+    try {
+      await db.query(
+        "update books  set title=$1, isbn=$2, date_read=$3, rating=$4 ,notes=$5, cover_url=$6 where isbn=$7 and email=$8",
+        [
+          title,
+          isbn,
+          date_read,
+          rating,
+          notes,
+          cover_url,
+          original_isbn,
+          req.user.email,
+        ]
+      );
+      const result = await db.query(
+        "select * from books where isbn=$1 and email =$2",
+        [isbn, req.user.email]
+      );
+      const book = result.rows[0];
+      res.render("book.ejs", { book: book });
+    } catch (error) {
+      res.render("error.ejs", { err: error, msg: "Cant update book" });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
 app.get("/index", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
